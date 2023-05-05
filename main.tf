@@ -1,5 +1,5 @@
 resource "aws_vpc" "vpc" {
-  cidr_block       = "10.0.0.0/16"
+  cidr_block       = var.vpc_cidr
 
   tags = {
     Name = "vpc"
@@ -7,17 +7,17 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_s3_bucket" "s3_bucket" {
-  bucket = "intuitive-cloud-example-bucket"
+  bucket = var.bucket_name
 
   tags = {
-    Name        = "bucket"
+    Name        = var.bucket_name
     Environment = "dev"
   }
 }
 
 resource "aws_subnet" "subnet1" {
   vpc_id     = aws_vpc.vpc.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = var.subnet_cidr
   availability_zone = data.aws_availability_zones.available.names[0]
 
   tags = {
@@ -62,7 +62,7 @@ resource "aws_instance" "instance_1" {
   availability_zone = data.aws_availability_zones.available.names[0]
   instance_type = var.instance_type
   security_groups = ["${aws_security_group.ec2_security_group.name}"]
-  key_name = "privatekey"
+  key_name = var.instance_key
   tags = {
     Name  = "instance-1"
   }
@@ -74,7 +74,7 @@ resource "aws_instance" "instance_2" {
   availability_zone = data.aws_availability_zones.available.names[0]
   instance_type = var.instance_type
   security_groups = ["${aws_security_group.ec2_security_group.name}"]
-  key_name = "privatekey"
+  key_name = var.instance_key
   tags = {
     Name  = "instance-2"
   }
