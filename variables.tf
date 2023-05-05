@@ -11,6 +11,7 @@ variable "subnet_cidr" {
 }
 
 variable "ami" {
+    //REDHAT-9 AMI
     default = "ami-0c41531b8d18cc72b"
 }
 
