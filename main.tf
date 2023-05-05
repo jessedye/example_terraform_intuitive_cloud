@@ -1,5 +1,5 @@
 resource "aws_vpc" "vpc" {
-  cidr_block       = var.vpc_cidr
+  cidr_block = var.vpc_cidr
 
   tags = {
     Name = "vpc"
@@ -16,8 +16,8 @@ resource "aws_s3_bucket" "s3_bucket" {
 }
 
 resource "aws_subnet" "subnet1" {
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.subnet_cidr
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.subnet_cidr
   availability_zone = data.aws_availability_zones.available.names[0]
 
   tags = {
@@ -36,47 +36,47 @@ resource "aws_security_group" "ec2_security_group" {
 }
 
 resource "aws_ebs_volume" "data_vol_1" {
-        availability_zone = data.aws_availability_zones.available.names[0]
-        size = 30
+  availability_zone = data.aws_availability_zones.available.names[0]
+  size              = 30
 }
 
 resource "aws_volume_attachment" "vol-attach-vol_1" {
-        device_name = "/dev/sdc"
-        volume_id = "${aws_ebs_volume.data_vol_1.id}"
-        instance_id = "${aws_instance.instance_1.id}"
+  device_name = "/dev/sdc"
+  volume_id   = aws_ebs_volume.data_vol_1.id
+  instance_id = aws_instance.instance_1.id
 }
 
 resource "aws_ebs_volume" "data_vol_2" {
-        availability_zone = data.aws_availability_zones.available.names[0]
-        size = 30
+  availability_zone = data.aws_availability_zones.available.names[0]
+  size              = 30
 }
 
 resource "aws_volume_attachment" "vol-attach-vol_2" {
-        device_name = "/dev/sdc"
-        volume_id = "${aws_ebs_volume.data_vol_2.id}"
-        instance_id = "${aws_instance.instance_2.id}"
+  device_name = "/dev/sdc"
+  volume_id   = aws_ebs_volume.data_vol_2.id
+  instance_id = aws_instance.instance_2.id
 }
 
 resource "aws_instance" "instance_1" {
-  ami           = var.ami
+  ami               = var.ami
   availability_zone = data.aws_availability_zones.available.names[0]
-  instance_type = var.instance_type
-  security_groups = ["${aws_security_group.ec2_security_group.name}"]
-  key_name = var.instance_key
+  instance_type     = var.instance_type
+  security_groups   = ["${aws_security_group.ec2_security_group.name}"]
+  key_name          = var.instance_key
   tags = {
-    Name  = "instance-1"
+    Name = "instance-1"
   }
 
 }
 
 resource "aws_instance" "instance_2" {
-  ami           = var.ami
+  ami               = var.ami
   availability_zone = data.aws_availability_zones.available.names[0]
-  instance_type = var.instance_type
-  security_groups = ["${aws_security_group.ec2_security_group.name}"]
-  key_name = var.instance_key
+  instance_type     = var.instance_type
+  security_groups   = ["${aws_security_group.ec2_security_group.name}"]
+  key_name          = var.instance_key
   tags = {
-    Name  = "instance-2"
+    Name = "instance-2"
   }
 
 }

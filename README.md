@@ -44,4 +44,10 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_ec2_instance_1_arn"></a> [ec2\_instance\_1\_arn](#output\_ec2\_instance\_1\_arn) | EC2 instance 1 arn |
+| <a name="output_ec2_instance_2"></a> [ec2\_instance\_2](#output\_ec2\_instance\_2) | EC2 instance 2 arn |
+| <a name="output_ec2_security_group"></a> [ec2\_security\_group](#output\_ec2\_security\_group) | EC2 security group ID |
+| <a name="output_subnet_1"></a> [subnet\_1](#output\_subnet\_1) | Subnet 1 ID |
+| <a name="output_vpc"></a> [vpc](#output\_vpc) | VPC ID |
